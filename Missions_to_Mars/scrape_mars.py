@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup as bs
 from splinter import Browser
 import time
-#import pandas
-#import numpy
+#import pandas as pd
+
 
 def init_browser():
     # @NOTE: Path to my chromedriver
@@ -17,7 +17,7 @@ def scrape_info():
     # Visit the following URL
     url = "https://mars.nasa.gov/news/"
     browser.visit(url)
-    time.sleep(3)
+    time.sleep(2)
     # Scrape page into Soup
     html = browser.html
     soup = bs(html, "html.parser")
@@ -57,7 +57,7 @@ def scrape_info():
     # Visit the following URL
     url = "https://twitter.com/marswxreport?lang=en"
     browser.visit(url)
-    time.sleep(3)
+    time.sleep(2)
     # Scrape page into Soup
     html = browser.html
     soup = bs(html, "html.parser")
@@ -85,7 +85,7 @@ def scrape_info():
     # Visit the following URL
     url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
     browser.visit(url)
-    time.sleep(3)    
+    time.sleep(2)    
     
     img_list =[]
     img_url_list = []
@@ -106,7 +106,7 @@ def scrape_info():
 
         img = results[0]
         img.click()
-        time.sleep(3)
+        time.sleep(2)
 
         # Scrape page into Soup
         html = browser.html
@@ -143,7 +143,7 @@ def scrape_info():
 #        ,"html_table":html_table
     }
 
-    time.sleep(7)
+    time.sleep(1)
     # Close the browser after scraping
     browser.quit()
 

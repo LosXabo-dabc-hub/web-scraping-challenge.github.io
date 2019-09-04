@@ -79,13 +79,66 @@ def scrape_info():
     df.columns = ['Fact', 'Value']
     html_table = df.to_html()
 
+   #### MARS HEMISPHERES
+    # Visit the following URL
+    url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    browser.visit(url)
+    time.sleep(3)    
+    
+    img_list =[]
+    img_url_list = []
+    title_list = []
+    hemi=1
+    count=1
+    x=0
+    kiki=[]
+
+    url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    xpath = ('//*[@id="product-section"]/div[2]/div[' + str(hemi) +']/div/a/h3')
+    while count < 5:
+        browser.visit(url)
+
+        hemi_name = browser.find_by_xpath(xpath).text
+        title_list.append(hemi_name)
+        results = browser.find_by_xpath(xpath)
+
+        img = results[0]
+        img.click()
+        time.sleep(3)
+
+        # Scrape page into Soup
+        html = browser.html
+        soup = bs(html, "html.parser")
+        img_desc = soup.find('div', id="wide-image")
+        img_src = img_desc.find('div',class_='downloads')
+        image = img_src.find('a')
+        if image.has_attr('href'):
+            target_img = image.attrs['href']
+        img_url_list.append(target_img)
+
+        hemi+=1
+        xpath = ('//*[@id="product-section"]/div[2]/div[' + str(hemi) +']/div/a/h3')
+        count+=1
+        x+=1
+    
+    hemisphere_image_urls = []
+    h=0
+    for items in title_list:
+        if h < 4:
+            dict = {"title": title_list[h], "img_url": img_url_list[h]}
+            hemisphere_image_urls.append(dict)
+            h+=1
+
+
+
     # Store data in a dictionary
     mars_data = {
         "news_title": news_title,
         "news_p": news_p,
         "featured_image_url": featured_image_url,
         "mars_weather": mars_weather,
-        "html_table":html_table
+        "hemisphere_image_urls":hemisphere_image_urls
+#        ,"html_table":html_table
     }
 
     time.sleep(7)

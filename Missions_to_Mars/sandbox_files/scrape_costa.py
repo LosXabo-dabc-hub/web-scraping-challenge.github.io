@@ -45,7 +45,7 @@ def scrape_info():
 
     time.sleep(7)
     # Close the browser after scraping
- #   browser.quit()
+    browser.quit()
 
     # Return results
     return costa_data
