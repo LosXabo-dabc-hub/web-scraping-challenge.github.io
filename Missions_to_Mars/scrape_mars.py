@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup as bs
 from splinter import Browser
 import time
-#import pandas as pd
+import pandas as pd
+import numpy
 
 
 def init_browser():
