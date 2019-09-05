@@ -2,12 +2,12 @@ from bs4 import BeautifulSoup as bs
 from splinter import Browser
 import time
 import pandas as pd
-import numpy
+#import numpy
 
 
 def init_browser():
     # @NOTE: Path to my chromedriver
-    executable_path = {"executable_path": "c:\\Users\\mwals\\Desktop\chromedriver"}
+    executable_path = {"executable_path": r"c:\\Users\\mwals\\Desktop\chromedriver"}
     return Browser("chrome", **executable_path, headless=False)
 
 
@@ -51,6 +51,9 @@ def scrape_info():
     img_desc = soup.find('div', class_="fancybox-inner fancybox-skin fancybox-dark-skin fancybox-dark-skin-open")
     image = img_desc.find('img')
     image['src']
+    
+    title_fea = soup.find('article')
+    featured_img_title = title_fea['alt']
     featured_image_url = jpl + image['src']
     
     
@@ -72,16 +75,19 @@ def scrape_info():
             z+=1
     # Scrapes for Mars weather
     
-#       ### MARS FACTS
-#    # Visit the following URL
-#    url = "https://space-facts.com/mars/"
-#    browser.visit(url)
+    ### MARS FACTS
+    # Visit the following URL
+    url = "https://space-facts.com/mars/"
+    browser.visit(url)
 
-#    tables = pd.read_html(url)
-#    df = tables[1]
+    tables = pd.read_html(url)
+    df = tables[1]
 #    df.columns = ['Fact', 'Value']
-#    html_table = df.to_html()
-
+    print(df.head(10))
+    html_table = df.to_html()
+    print(html_table)
+    
+    
     #### MARS HEMISPHERES
     # Visit the following URL
     url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
@@ -139,9 +145,10 @@ def scrape_info():
         "news_title": news_title,
         "news_p": news_p,
         "featured_image_url": featured_image_url,
+        "featured_img_title": featured_img_title, 
         "mars_weather": mars_weather,
+        "html_table":html_table,
         "hemisphere_image_urls":hemisphere_image_urls
-#        ,"html_table":html_table
     }
 
     time.sleep(1)

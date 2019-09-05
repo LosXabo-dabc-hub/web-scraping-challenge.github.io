@@ -25,7 +25,7 @@
 	
 	<div class="row">
 		<div class="col-xs-8 col-md-8">
-			<h3>Featured Mars Image</h3>
+			<h3>Featured Mars Image: {{ trek.featured_img_title }}</h3>
 			<img src="{{ trek.featured_image_url}}" style="width:100%" class="img-responsive" style="padding-right: 20px; padding left: 20px;" alt="featured_image"><br />
 			<!-- <a href="{{ trek.featured_image_url}}">{{ trek.featured_image_url}}</a>
 			<p> {{ trek.featured_image_url}} </p> -->
@@ -109,7 +109,9 @@
 	<br>
 	<br>
 	
-	
+
+
+
 <!--    <h3>Current Weather on Mars</h3>
 	<p> {{ trek.mars_weather }} </p>
 	<br> -->
@@ -284,7 +286,16 @@
 	-->
 	
   </div>
-  </div>
+  
+ <div>
+ {{ trek.html_table }} 
+ 
+ </div>
+
+<p> inserted above </p>
+  
+ 
+  
 </body>
 
 </html>
