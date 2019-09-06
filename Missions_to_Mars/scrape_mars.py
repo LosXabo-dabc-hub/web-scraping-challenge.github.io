@@ -77,7 +77,7 @@ def scrape_info():
     
     ### MARS FACTS
     # Visit the following URL
-    url = "https://space-facts.com/mars/"
+    url = r"https://space-facts.com/mars/"
     browser.visit(url)
 
     tables = pd.read_html(url)
@@ -85,6 +85,7 @@ def scrape_info():
 #    df.columns = ['Fact', 'Value']
     print(df.head(10))
     html_table = df.to_html()
+    html_table = str(html_table)
     print(html_table)
     
     
