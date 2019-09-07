@@ -183,6 +183,8 @@
 		</tbody>
 	</table>
 -->		
+
+
 	<br>
 	
 	
@@ -286,39 +288,23 @@
 	-->
 	
   </div>
-  
+ <!-- 
  <div>
  <pre>{{ trek.html_table }}</pre>
  </div>
-
+-->
 <p> THIS IS WHERE I AM TRYING TO READ IN TABLE </p>
 
+<table id="scrape_table"></table>
 
- <!--
+
+<script>
+
+
+document.getElementById("scrape_table").innerHTML = {{ trek.html_table }};
+</script> 
+
  
-
- <script type="text/javascript">
-function stripHtml(html){
-
-    var temporalDivElement = document.createElement("div");
-
-    temporalDivElement.innerHTML = html;
-
-    return temporalDivElement.textContent || temporalDivElement.innerText || "";
-}
-
-var htmlString=  "{{ trek.html_table }}";
-
-stripHtml(htmlString)
-</script>
-var el = document.createElement( 'html' );
-el.innerHTML = {{ trek.html_table }};
-
-
-var parser = new DOMParser();
-var htmlDoc = parser.parseFromString({{ trek.html_table }}, '{{ trek.html_table }}/html');
-
- -->
  <br>
  <br>
   

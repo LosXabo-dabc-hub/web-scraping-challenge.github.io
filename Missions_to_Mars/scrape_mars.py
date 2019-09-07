@@ -84,8 +84,8 @@ def scrape_info():
     df = tables[1]
 #    df.columns = ['Fact', 'Value']
     print(df.head(10))
-    html_table = df.to_html()
-    html_table = str(html_table)
+    html_table = df.to_html(table_id='scrape_table')
+ #   html_table = str(html_table)
     print(html_table)
     
     
