@@ -1,313 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Mission to Mars</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  
-<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Mission to Mars</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 </head>
-
 <body>
-  <div class="container-fluid">
-    <div class="jumbotron text-center">
-      <h1>Mission to Mars</h1>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
-    </div>
-	
-	
-	<h3>Latest Mars News</h3>
-    <p><span style="font-weight:bold">{{ trek.news_title }}</span></p>	
-    <p>{{ trek.news_p }}</p>
-	
-	<div class="row">
-		<div class="col-xs-8 col-md-8">
-			<h3>Featured Mars Image: {{ trek.featured_img_title }}</h3>
-			<img src="{{ trek.featured_image_url}}" style="width:100%" class="img-responsive" style="padding-right: 20px; padding left: 20px;" alt="featured_image"><br />
-			<!-- <a href="{{ trek.featured_image_url}}">{{ trek.featured_image_url}}</a>
+	<div class="container-fluid">
+		<div class="jumbotron text-center">
+			<h1>Mission to Mars</h1>
+			<p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+		</div>
+		<h3>Latest Mars News</h3>
+		<p><span style="font-weight:bold">{{ trek.news_title }}</span></p>
+		<p>{{ trek.news_p }}</p>
+		<div class="row">
+			<div class="col-xs-8 col-md-8">
+				<h3>Featured Mars Image: {{ trek.featured_img_title }}</h3>
+				<img src="{{ trek.featured_image_url | default('static/images/error.png')}}" style="width:100%" class="img-responsive"
+					style="padding-right: 20px; padding left: 20px;" alt="featured_image"><br />
+				<!-- <a href="{{ trek.featured_image_url}}">{{ trek.featured_image_url}}</a>
 			<p> {{ trek.featured_image_url}} </p> -->
-		</div>
-		<div class="col-xs-4 col-md-4">
-			<div class="col-xs-auto col-md-auto">
-				<h3>Current Weather on Mars</h3>
-				<p> {{ trek.mars_weather }} </p>
 			</div>
-			<div class="col-xs-auto col-md-auto">
-				<h3>Mars Facts</h3>
-				<style>
-		table, th, td {
-			border: 1px solid black;
-		}
+			<div class="col-xs-4 col-md-4">
+				<div class="col-xs-auto col-md-auto">
+					<h3>Current Weather on Mars</h3>
+					<p> {{ trek.mars_weather }} </p>
+				</div>
+				<div class="col-xs-auto col-md-auto">
+					<h3>Mars Facts</h3>
+					<style>
+						table, th, td {
+							border: 1px solid black;
+						}
+						th, td {
+							padding: 5px;
+						}
+					</style>
+					{{ trek.html_table | safe}}
+				</div>
+			</div>
+		</div>
+		<br>
+		<h3 class="text-center">Mars Hemispheres</h3>
+		<br>
+		<div class="row">
+			<div class="col-xs-6 col-md-6">
+				<img src="{{ trek.hemisphere_image_urls[3]['img_url'] | default('static/images/error.png')}}" style="width:100%" class="img-responsive"
+					style="padding-right: 20px; padding left: 20px;"
+					alt=" {{trek.hemisphere_image_urls[3]['title']}} " />
+				<h5>{{trek.hemisphere_image_urls[3]['title']}}</h5>
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<img src="{{ trek.hemisphere_image_urls[0]['img_url'] | default('static/images/error.png') }}" style="width:100%" class="img-responsive"
+					style="padding-right: 20px; padding left: 20px;"
+					alt=" {{trek.hemisphere_image_urls[0]['title'] }} " />
+				<h5>{{trek.hemisphere_image_urls[0]['title']}}</h5>
+			</div>
+		</div>
 
-		th, td {
-			padding: 3px;
-		}
-		</style>
-				<table border="1" class="dataframe" width=100%; >
-				<thead>
-			<tr style="text-align: left;">
-
-				<th></th>
-				<th >Value</th>
-			</tr>
-		</thead>
-				<tbody>
-			<tr>
-
-				<td>Equatorial Diameter:</td>
-				<td>6,792 km</td>
-			</tr>
-			<tr>
-
-				<td>Polar Diameter:</td>
-				<td>6,752 km</td>
-			</tr>
-			<tr>
-
-				<td>Mass:</td>
-				<td>6.39 × 10^23 kg (0.11 Earths)</td>
-			</tr>
-			<tr>
-
-				<td>Moons:</td>
-				<td>2 (Phobos &amp; Deimos)</td>
-			</tr>
-			<tr>
-
-				<td>Orbit Distance:</td>
-				<td>227,943,824 km (1.38 AU)</td>
-			</tr>
-				<tr>
-
-					<td>Orbit Period:</td>
-					<td>687 days (1.9 years)</td>
-				</tr>
-				<tr>
-
-					<td>Surface Temperature:</td>
-					<td>-87 to -5 °C</td>
-				</tr>
-				<tr>
-
-					<td>First Record:</td>
-					<td>2nd millennium BC</td>
-				</tr>
-				<tr>
-
-					<td>Recorded By:</td>
-					<td>Egyptian astronomers</td>
-				</tr>
-			</tbody>
-				</table>
+		<div class="row">
+			<div class="col-xs-6 col-md-6">
+				<img src="{{ trek.hemisphere_image_urls[1]['img_url'] | default('static/images/error.png') }}" style="width:100%" class="img-responsive"
+					style="padding-right: 20px; padding left: 20px;"
+					alt=" {{trek.hemisphere_image_urls[1]['title']}} " />
+				<h5>{{trek.hemisphere_image_urls[1]['title']}}</h5>
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<img src="{{ trek.hemisphere_image_urls[2]['img_url'] | default('static/images/error.png') }}" style="width:100%" class="img-responsive"
+					style="padding-right: 20px; padding left: 20px;"
+					alt=" {{trek.hemisphere_image_urls[2]['title']}} " />
+				<h5>{{trek.hemisphere_image_urls[2]['title']}}</h5>
 			</div>
 		</div>
 	</div>
-			
-	<br>
-	<br>
-	
-
-
-
-<!--    <h3>Current Weather on Mars</h3>
-	<p> {{ trek.mars_weather }} </p>
-	<br> -->
-	
-<!--    <h3>Mars Facts</h3>
-	<style>
-	table, th, td {
-		border: 1px solid black;
-	}
-
-	th, td {
-		padding: 5px;
-	}
-	</style>
-	 <table border="1" class="dataframe" width=auto; >
-	 <thead>
-		<tr style="text-align: left;">
-			<th></th>
-			<th></th>
-			<th >Value</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<th>0</th>
-			<td>Equatorial Diameter:</td>
-			<td>6,792 km</td>
-		</tr>
-		<tr>
-			<th>1</th>
-			<td>Polar Diameter:</td>
-			<td>6,752 km</td>
-		</tr>
-		<tr>
-			<th>2</th>
-			<td>Mass:</td>
-			<td>6.39 × 10^23 kg (0.11 Earths)</td>
-		</tr>
-		<tr>
-			<th>3</th>
-			<td>Moons:</td>
-			<td>2 (Phobos &amp; Deimos)</td>
-		</tr>
-		<tr>
-			<th>4</th>
-			<td>Orbit Distance:</td>
-			<td>227,943,824 km (1.38 AU)</td>
-		</tr>
-			<tr>
-				<th>5</th>
-				<td>Orbit Period:</td>
-				<td>687 days (1.9 years)</td>
-			</tr>
-			<tr>
-				<th>6</th>
-				<td>Surface Temperature:</td>
-				<td>-87 to -5 °C</td>
-			</tr>
-			<tr>
-				<th>7</th>
-				<td>First Record:</td>
-				<td>2nd millennium BC</td>
-			</tr>
-			<tr>
-				<th>8</th>
-				<td>Recorded By:</td>
-				<td>Egyptian astronomers</td>
-			</tr>
-		</tbody>
-	</table>
--->		
-
-
-	<br>
-	
-	
-	<h3 class="text-center">Mars Hemispheres</h3>	
-	<br>
-	<div class="row">
-		<div class="col-xs-6 col-md-6">
-			<img src="{{ trek.hemisphere_image_urls[3]['img_url'] }}"  style="width:100%" class="img-responsive" style="padding-right: 20px; padding left: 20px;" alt=" {{trek.hemisphere_image_urls[3]['title']}} "/>
-			<h5>{{trek.hemisphere_image_urls[3]['title']}}</h5>
-
-		</div>
-		<div class="col-xs-6 col-md-6">
-			<img src="{{ trek.hemisphere_image_urls[0]['img_url'] }}"  style="width:100%" class="img-responsive" style="padding-right: 20px; padding left: 20px;" alt=" {{trek.hemisphere_image_urls[0]['title']}} "/>
-			<h5>{{trek.hemisphere_image_urls[0]['title']}}</h5>
-		</div>
-	</div>	
-
-	<div class="row">
-		<div class="col-xs-6 col-md-6">
-			<img src="{{ trek.hemisphere_image_urls[1]['img_url'] }}"  style="width:100%" class="img-responsive" style="padding-right: 20px; padding left: 20px;" alt=" {{trek.hemisphere_image_urls[1]['title']}} "/>
-			<h5>{{trek.hemisphere_image_urls[1]['title']}}</h5>
-
-		</div>
-		<div class="col-xs-6 col-md-6">
-			<img src="{{ trek.hemisphere_image_urls[2]['img_url'] }}"  style="width:100%" class="img-responsive" style="padding-right: 20px; padding left: 20px;" alt=" {{trek.hemisphere_image_urls[2]['title']}} "/>
-			<h5>{{trek.hemisphere_image_urls[2]['title']}}</h5>
-		</div>
-	</div>	
-	
-	
-	
-	
-<!--	<div class="col-md-4">
-	<h3 class="text-center">Mars Hemispheres</h3>	
-		<div class="row">
-			<div class="col-sm-2">
-
-				<h4>{{trek.hemisphere_image_urls[0]['title']}}</h4>		
-				<img src="{{ trek.hemisphere_image_urls[0]['img_url'] }}"  width="200" height="200" alt=" {{trek.hemisphere_image_urls[0]['title']}} "><br />
-				<a href="{{trek.hemisphere_image_urls[0]['img_url']}}">{{trek.hemisphere_image_urls[0]['img_url']}}</a>
-
-
-				<h4>{{trek.hemisphere_image_urls[1]['title']}}</h4>		
-				<img src="{{ trek.hemisphere_image_urls[1]['img_url'] }}"  width="200" height="200" alt=" {{trek.hemisphere_image_urls[1]['title']}} "><br />
-				<a href="{{trek.hemisphere_image_urls[1]['img_url']}}">{{trek.hemisphere_image_urls[1]['img_url']}}</a>
-
-				
-			</div>
-
-		</div>
-		<div class="row">
-			<div class="col-sm-2">
-
-				<h4>{{trek.hemisphere_image_urls[2]['title']}}</h4>		
-				<img src="{{ trek.hemisphere_image_urls[2]['img_url'] }}"  width="400" height="400" alt=" {{trek.hemisphere_image_urls[2]['title']}} "><br />
-				<a href="{{trek.hemisphere_image_urls[2]['img_url']}}">{{trek.hemisphere_image_urls[2]['img_url']}}</a>
-
-
-				<h4>{{trek.hemisphere_image_urls[3]['title']}}</h4>		
-				<img src="{{ trek.hemisphere_image_urls[3]['img_url'] }}"  width="400" height="400" alt=" {{trek.hemisphere_image_urls[3]['title']}} "><br />
-				<a href="{{trek.hemisphere_image_urls[3]['img_url']}}">{{trek.hemisphere_image_urls[3]['img_url']}}</a>
-
-
-			</div>
-		</div>
-	</div>
--->
-
-
-<!--	<h3>Mars Hemispheres</h3>
-	<br>
-	<h4>{{trek.hemisphere_image_urls[0]['title']}}</h4>		
-	<img src="{{ trek.hemisphere_image_urls[0]['img_url'] }}"  width="400" height="400" alt=" {{trek.hemisphere_image_urls[0]['title']}} "><br />
-	<a href="{{trek.hemisphere_image_urls[0]['img_url']}}">{{trek.hemisphere_image_urls[0]['img_url']}}</a>
-    <p> {{ trek.hemisphere_image_urls[0]['img_url']}} </p>	
-
-	<br>
-	<h3>Mars Hemispheres</h3>
-	<br>
-	<h4>{{trek.hemisphere_image_urls[1]['title']}}</h4>		
-	<img src="{{ trek.hemisphere_image_urls[1]['img_url'] }}"  width="400" height="400" alt=" {{trek.hemisphere_image_urls[1]['title']}} "><br />
-	<a href="{{trek.hemisphere_image_urls[1]['img_url']}}">{{trek.hemisphere_image_urls[1]['img_url']}}</a>
-    <p> {{ trek.hemisphere_image_urls[1]['img_url']}} </p>	
-	
-	<br>
-	<h3>Mars Hemispheres</h3>
-	<br>
-	<h4>{{trek.hemisphere_image_urls[2]['title']}}</h4>		
-	<img src="{{ trek.hemisphere_image_urls[2]['img_url'] }}"  width="400" height="400" alt=" {{trek.hemisphere_image_urls[2]['title']}} "><br />
-	<a href="{{trek.hemisphere_image_urls[2]['img_url']}}">{{trek.hemisphere_image_urls[2]['img_url']}}</a>
-    <p> {{ trek.hemisphere_image_urls[2]['img_url']}} </p>	
-
-	<br>
-	<h3>Mars Hemispheres</h3>
-	<br>
-	<h4>{{trek.hemisphere_image_urls[3]['title']}}</h4>		
-	<img src="{{ trek.hemisphere_image_urls[3]['img_url'] }}"  width="400" height="400" alt=" {{trek.hemisphere_image_urls[3]['title']}} "><br />
-	<a href="{{trek.hemisphere_image_urls[3]['img_url']}}">{{trek.hemisphere_image_urls[3]['img_url']}}</a>
-    <p> {{ trek.hemisphere_image_urls[3]['img_url']}} </p>	
-
-	-->
-	
-  </div>
- <!-- 
- <div>
- <pre>{{ trek.html_table }}</pre>
- </div>
--->
-<p> THIS IS WHERE I AM TRYING TO READ IN TABLE </p>
-
-<table id="scrape_table"></table>
-
-
-<script>
-
-
-document.getElementById("scrape_table").innerHTML = {{ trek.html_table }};
-</script> 
-
- 
- <br>
- <br>
-  
+<br>
 </body>
 
 </html>

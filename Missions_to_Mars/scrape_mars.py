@@ -82,11 +82,8 @@ def scrape_info():
 
     tables = pd.read_html(url)
     df = tables[1]
-#    df.columns = ['Fact', 'Value']
-    print(df.head(10))
-    html_table = df.to_html(table_id='scrape_table')
- #   html_table = str(html_table)
-    print(html_table)
+    df.columns = [' ', 'Value']
+    html_table = df.to_html(table_id="html_tbl_css",justify='left',index=False)
     
     
     #### MARS HEMISPHERES
@@ -138,8 +135,6 @@ def scrape_info():
             dict = {"title": title_list[h], "img_url": img_url_list[h]}
             hemisphere_image_urls.append(dict)
             h+=1
-
-
 
     # Store data in a dictionary
     mars_data = {

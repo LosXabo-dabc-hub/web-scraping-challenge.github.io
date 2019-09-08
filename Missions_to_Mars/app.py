@@ -21,7 +21,10 @@ def home():
     mission_data = mongo.db.collection.find_one()
 
     # Return template and data
-    return render_template("index.html", trek=mission_data)
+    if mission_data: 
+        return render_template("index.html", trek=mission_data)
+    else:
+        return redirect("/scrape")
 
 
 # Route that will trigger the scrape function
@@ -39,4 +42,4 @@ def scrape():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
