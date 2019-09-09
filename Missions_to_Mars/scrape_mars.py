@@ -88,20 +88,26 @@ def scrape_info():
     
     #### MARS HEMISPHERES
     # Visit the following URL
-    url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+#    url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    url = "https://astrogeology.usgs.gov/maps/mars-viking-hemisphere-point-perspectives"    
     browser.visit(url)
     time.sleep(2)    
     
     img_list =[]
     img_url_list = []
     title_list = []
-    hemi=1
+    hemi=2
     count=1
     x=0
     kiki=[]
 
-    url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
-    xpath = ('//*[@id="product-section"]/div[2]/div[' + str(hemi) +']/div/a/h3')
+#    url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    url = "https://astrogeology.usgs.gov/maps/mars-viking-hemisphere-point-perspectives"    
+#    xpath = ('//*[@id="product-section"]/div[2]/div[' + str(hemi) +']/div/a/h3')
+    xpath = ('//*[@id="publish"]/div[1]/div[1]/div[4]/div/a[' + str(hemi) +']/div/h3')    
+#              //*[@id="publish"]/div[1]/div[1]/div[4]/div/a[4]/div/h3
+#              //*[@id="publish"]/div[1]/div[1]/div[4]/div/a[6]/div/h3
+#              //*[@id="publish"]/div[1]/div[1]/div[4]/div/a[8]/div/h3
     while count < 5:
         browser.visit(url)
 
@@ -123,8 +129,9 @@ def scrape_info():
             target_img = image.attrs['href']
         img_url_list.append(target_img)
 
-        hemi+=1
-        xpath = ('//*[@id="product-section"]/div[2]/div[' + str(hemi) +']/div/a/h3')
+        hemi+=2
+#        xpath = ('//*[@id="product-section"]/div[2]/div[' + str(hemi) +']/div/a/h3')
+        xpath = ('//*[@id="publish"]/div[1]/div[1]/div[4]/div/a[' + str(hemi) +']/div/h3')  
         count+=1
         x+=1
     
